@@ -44,7 +44,7 @@
             type="button"
             icon="pi pi-trash"
             class="p-button-danger"
-            @click="handleDelete(slotProps.data.id)"
+            @click="handleDelete(slotProps.data.id_articulo)"
             size="small"
           />
         </template>
@@ -56,7 +56,6 @@
 <script setup>
 import { computed, watchEffect } from 'vue'
 import DataTable from 'primevue/datatable'
-import TreeTable from 'primevue/treetable'
 import Button from 'primevue/button'
 import Skeleton from 'primevue/skeleton'
 import { ref } from 'vue'
@@ -125,7 +124,4 @@ const onRowsChange = newRows => {
 watchEffect(() => {
   console.log('este es', tableData.value)
 })
-
-// Seleccionar el tipo de componente
-const TypeComponent = computed(() => (props.paginator ? TreeTable : DataTable))
 </script>

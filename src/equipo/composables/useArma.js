@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { sendArma, getArma } from '../services/api'
+import { sendArma, getArma, deleteArma } from '../services/api'
 
 export function useArma() {
   const response = ref('')
@@ -29,10 +29,10 @@ export function useArma() {
     }
   }
 
-  const GetArma = async data => {
+  const GetArma = async () => {
     loadingGet.value = true
     try {
-      const res = await getArma(data)
+      const res = await getArma()
 
       responseGet.value = res.data
     } catch (err) {
@@ -42,17 +42,17 @@ export function useArma() {
     }
   }
 
-  // const DeleteArma = async (value) => {
-  //   loadingDelete.value = true;
-  //   try {
-  //     const res = await deleteArma(value);
-  //     responseDelete.value = res.data;
-  //   } catch (err) {
-  //     errorDelete.value = err;
-  //   } finally {
-  //     loadingDelete.value = false;
-  //   }
-  // };
+  const DeleteArma = async value => {
+    loadingDelete.value = true
+    try {
+      const res = await deleteArma(value)
+      responseDelete.value = res.data
+    } catch (err) {
+      errorDelete.value = err
+    } finally {
+      loadingDelete.value = false
+    }
+  }
 
   return {
     response,
@@ -69,5 +69,6 @@ export function useArma() {
 
     SendArma,
     GetArma,
+    DeleteArma,
   }
 }

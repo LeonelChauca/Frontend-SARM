@@ -133,7 +133,6 @@ import { useFormStore } from '../store/formStore'
 import { useOptionFormStore } from '../store/optionFormStore'
 import { useForm, useField, ErrorMessage } from 'vee-validate'
 const { estado_fisico, estado_logico, tipo_articulo } = useOptionFormStore()
-const emit = defineEmits(['valid'])
 
 const { validate, resetForm } = useForm({
   validationSchema: validateArticulo,
@@ -153,13 +152,6 @@ const { value: industria } = useField('industria')
 const { value: est_fisico } = useField('id_estado_fisico')
 const { value: est_logico } = useField('id_estado_logico')
 const { value: tp_articulo } = useField('id_tipo_articulo')
-
-const validarStep = async () => {
-  const isValid = await validate()
-  if (isValid) {
-    emit('valid', true)
-  }
-}
 
 defineExpose({
   validateForm: async () => {

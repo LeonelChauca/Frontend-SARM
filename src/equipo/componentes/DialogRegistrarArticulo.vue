@@ -3,7 +3,7 @@
     :visible="dialogVisible"
     @update:visible="emit('update:dialogVisible', $event)"
     header="Registrar Artículo"
-    class="w-[100%] lg:w-[70%] overflow-scroll"
+    class="w-[100%] lg:w-[70%]"
     modal
     :closable="true"
     :draggable="false"
@@ -47,9 +47,16 @@
         iconPos="right"
         @click="handleNextStep"
       />
-      <Button v-else label="Enviar" icon="pi pi-check" @click="submitForm" />
+      <Button
+        v-else
+        label="Enviar"
+        :loading="loading"
+        icon="pi pi-check"
+        @click="submitForm"
+      />
     </div>
   </Dialog>
+  <Toaster richColors />
 </template>
 
 <script setup>
@@ -61,7 +68,8 @@ import CreateDatosArticulo from './CreateDatosArticulo.vue'
 import CreateMarcaModelo from './CreateMarcaModelo.vue'
 import { useArma } from '../composables/useArma'
 import { useFormStore } from '../store/formStore'
- 
+import { Toaster } from 'vue-sonner'
+import { showToast, showError } from '../helpers/Toast'
 // Props y Emisiones
 defineProps({
   dialogVisible: Boolean,
@@ -116,7 +124,7 @@ const prevStep = () => {
   }
 }
 
-const { response, SendArma } = useArma()
+const { response, SendArma, loading } = useArma()
 // Enviar el Formulario
 const submitForm = async () => {
   const isValidArma = await datosArmaRef.value?.validateForm()
@@ -125,11 +133,11 @@ const submitForm = async () => {
     if (response.value.status === 201) {
       BorrarDatosFormAll()
       data.limpiarFormulario()
-      // showToast('success', 'Artículo registrado correctamente.')
+      currentStep.value = 1
+      showToast('Artículo registrado correctamente. !')
     }
-    console.log('Formulario completo. Enviando datos...')
   } else {
-    console.error('Errores en los datos del último paso.')
+    showError('Error datos no validos en el articulo. !')
   }
 }
 

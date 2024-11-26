@@ -46,6 +46,11 @@ export const sendArma = data => {
 }
 
 //obtener arma
-export const getArma = data => {
+export const getArma = () => {
   return api.get('/articulo/arma')
+}
+
+//borrar arma
+export const deleteArma = data => {
+  return api.delete(`/articulo/arma/${data}`)
 }

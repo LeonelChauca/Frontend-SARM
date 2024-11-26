@@ -4,15 +4,11 @@
       <section class="flex gap-6 w-full justify-center">
         <CardComponent
           title="total de armas"
-          value="1234"
+          :value="countArmas"
           color="bg-green-600"
         />
-        <CardComponent
-          title="total de armas"
-          value="1234"
-          color="bg-blue-400"
-        />
-        <CardComponent title="total de armas" value="1234" color="bg-red-500" />
+        <CardComponent title="total de armas" :value="0" color="bg-blue-400" />
+        <CardComponent title="total de armas" :value="0" color="bg-red-500" />
       </section>
       <section></section>
     </main>
@@ -32,6 +28,10 @@
         :paginator="true"
         :rows="5"
         :loading="loadingGet"
+        :onDelete="DeleteArma"
+        :emmitCambio="swcambios"
+        :responseDelete="responseDelete"
+        @cambios="swcambios = $event"
       />
     </section>
   </div>
@@ -44,21 +44,29 @@
 import TableArticulo from '@/equipo/componentes/TableArticulo.vue'
 import CardComponent from '@/equipo/componentes/CardComponent.vue'
 import DialogRegistrarArticulo from '../componentes/DialogRegistrarArticulo.vue'
-import { onMounted, ref } from 'vue'
+import { ref, watch } from 'vue'
 import { dataArmas } from '../helpers/dataColumns'
 import { useArma } from '../composables/useArma'
 
 const dialogVisible = ref(false)
 const data = ref([])
-const { responseGet, loadingGet, GetArma } = useArma()
+const countArmas = ref(0)
+const swcambios = ref(false)
+const { responseGet, loadingGet, GetArma, DeleteArma, responseDelete } =
+  useArma()
 
-onMounted(async () => {
-  try {
-    await GetArma()
-    data.value = responseGet.value
-    console.log('Datos cargados:', data.value)
-  } catch (error) {
-    console.error('Error al cargar los datos:', error)
-  }
-})
+watch(
+  swcambios,
+  async () => {
+    try {
+      await GetArma()
+      data.value = responseGet.value
+      console.log('Datos cargados:', data.value)
+      countArmas.value = data.value.length
+    } catch (error) {
+      console.error('Error al cargar los datos:', error)
+    }
+  },
+  { immediate: true },
+)
 </script>

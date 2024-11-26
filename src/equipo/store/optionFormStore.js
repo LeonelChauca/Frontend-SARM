@@ -20,7 +20,7 @@ export const useOptionFormStore = defineStore('optionFormStore', {
       try {
         await GetOptions(value)
         console.log('hola')
-        console.log(response.value.modelo)
+        console.log(response.value)
         this.marca.value = response.value.marca
         this.modelo.value = response.value.modelo
         this.estado_fisico.value = response.value.estado_fisico

@@ -1,16 +1,9 @@
-import { useToast } from 'primevue/usetoast'
-const toast = useToast()
-export const showToast = ({
-  title = '',
-  description = '',
-  status = 'info',
-  duration = 3000,
-}) => {
-  toast({
-    title,
-    description,
-    status,
-    duration,
-    isClosable: true,
-  })
+import { toast } from 'vue-sonner'
+
+export const showToast = message => {
+  toast.success(message)
+}
+
+export const showError = message => {
+  toast.error(message)
 }
