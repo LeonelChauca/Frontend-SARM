@@ -25,6 +25,15 @@
         @click="dialogVisible = true"
       />
     </section>
+    <section>
+      <TableArticulo
+        :columns="dataArmas"
+        :data="data"
+        :paginator="true"
+        :rows="5"
+        :loading="loadingGet"
+      />
+    </section>
   </div>
   <DialogRegistrarArticulo
     :dialogVisible="dialogVisible"
@@ -32,9 +41,24 @@
   />
 </template>
 <script setup>
+import TableArticulo from '@/equipo/componentes/TableArticulo.vue'
 import CardComponent from '@/equipo/componentes/CardComponent.vue'
 import DialogRegistrarArticulo from '../componentes/DialogRegistrarArticulo.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { dataArmas } from '../helpers/dataColumns'
+import { useArma } from '../composables/useArma'
 
 const dialogVisible = ref(false)
+const data = ref([])
+const { responseGet, loadingGet, GetArma } = useArma()
+
+onMounted(async () => {
+  try {
+    await GetArma()
+    data.value = responseGet.value
+    console.log('Datos cargados:', data.value)
+  } catch (error) {
+    console.error('Error al cargar los datos:', error)
+  }
+})
 </script>

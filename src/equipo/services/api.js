@@ -44,3 +44,8 @@ export const getOptionsForm = value => {
 export const sendArma = data => {
   return api.post('/articulo/arma', data)
 }
+
+//obtener arma
+export const getArma = data => {
+  return api.get('/articulo/arma')
+}
