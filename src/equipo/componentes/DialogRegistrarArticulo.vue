@@ -2,7 +2,7 @@
   <Dialog
     :visible="dialogVisible"
     @update:visible="emit('update:dialogVisible', $event)"
-    header="Registrar Artículo"
+    :header="`Registrar ${tipo}`"
     class="w-[100%] lg:w-[70%]"
     modal
     :closable="true"
@@ -12,7 +12,7 @@
       <StepList>
         <Step value="1">Marca y Modelo</Step>
         <Step value="2">Datos Principales</Step>
-        <Step value="3">Datos del Arma</Step>
+        <Step value="3">Datos del {{ tipo }}</Step>
       </StepList>
       <StepPanels>
         <!-- Paso 1 -->
@@ -24,8 +24,12 @@
           <CreateDatosArticulo ref="datosArticuloRef" />
         </StepPanel>
         <!-- Paso 3 -->
-        <StepPanel value="3">
+        <StepPanel value="3" v-if="tipo === 'Arma'">
           <CreateDatosArma ref="datosArmaRef" />
+        </StepPanel>
+
+        <StepPanel value="3" v-else>
+          <CreateDatosEquipo />
         </StepPanel>
       </StepPanels>
     </Stepper>
@@ -66,6 +70,7 @@ import { useOptionFormStore } from '../store/optionFormStore'
 import CreateDatosArma from './CreateDatosArma.vue'
 import CreateDatosArticulo from './CreateDatosArticulo.vue'
 import CreateMarcaModelo from './CreateMarcaModelo.vue'
+import CreateDatosEquipo from './CreateDatosEquipo.vue'
 import { useArma } from '../composables/useArma'
 import { useFormStore } from '../store/formStore'
 import { Toaster } from 'vue-sonner'
@@ -73,6 +78,7 @@ import { showToast, showError } from '../helpers/Toast'
 // Props y Emisiones
 defineProps({
   dialogVisible: Boolean,
+  tipo: String,
 })
 const emit = defineEmits(['update:dialogVisible'])
 

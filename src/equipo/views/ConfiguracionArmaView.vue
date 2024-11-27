@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[85%] mx-auto my-3">
+  <TemplateComponent>
     <main class="flex w=[90%] mx-auto mt-5">
       <section class="flex gap-6 w-full justify-center">
         <CardComponent
@@ -34,13 +34,15 @@
         @cambios="swcambios = $event"
       />
     </section>
-  </div>
+  </TemplateComponent>
   <DialogRegistrarArticulo
     :dialogVisible="dialogVisible"
     @update:dialogVisible="dialogVisible = $event"
+    tipo="Arma"
   />
 </template>
 <script setup>
+import TemplateComponent from '@/equipo/componentes/TemplateComponent.vue'
 import TableArticulo from '@/equipo/componentes/TableArticulo.vue'
 import CardComponent from '@/equipo/componentes/CardComponent.vue'
 import DialogRegistrarArticulo from '../componentes/DialogRegistrarArticulo.vue'
@@ -58,14 +60,9 @@ const { responseGet, loadingGet, GetArma, DeleteArma, responseDelete } =
 watch(
   swcambios,
   async () => {
-    try {
-      await GetArma()
-      data.value = responseGet.value
-      console.log('Datos cargados:', data.value)
-      countArmas.value = data.value.length
-    } catch (error) {
-      console.error('Error al cargar los datos:', error)
-    }
+    await GetArma()
+    data.value = responseGet.value
+    countArmas.value = data.value.length
   },
   { immediate: true },
 )

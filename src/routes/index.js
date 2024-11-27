@@ -26,7 +26,8 @@ const routes = [
       {
         path: 'configuracionEquipo',
         name: 'configuracionEquipo',
-        component: () => import('../equipo/views/ConfiguracionEquipoView.vue'),
+        component: () =>
+          import('../equipo/views/DashboardConfiguracionView.vue'),
         children: [
           {
             path: 'armas',
@@ -52,6 +53,12 @@ const routes = [
             component: () =>
               import('../equipo/views/ConfiguracionModeloView.vue'),
           },
+          // {
+          //   path: 'configuracion',
+          //   name: 'config-equipo',
+          //   component: () =>
+          //     import('../equipo/views/DashboardConfiguracionView.vue'),
+          // },
         ],
       },
     ],
