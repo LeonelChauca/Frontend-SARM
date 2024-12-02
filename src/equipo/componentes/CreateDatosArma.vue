@@ -206,12 +206,7 @@ const { validate, resetForm } = useForm({
     capacidad_tambor: 0,
   },
 })
-const validarStep = async () => {
-  const isValid = await validate()
-  if (isValid) {
-    emit('valid', true)
-  }
-}
+
 defineExpose({
   validateForm: async () => {
     const isValid = await validate()

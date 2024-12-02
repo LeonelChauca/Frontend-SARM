@@ -72,3 +72,42 @@ export const dataArmas = [
     visible: true,
   },
 ]
+
+export const dataEquipo = [
+  {
+    Field: 'id',
+    header: 'ID',
+    size: '0%',
+    visible: false,
+  },
+  {
+    Field: 'id_articulo',
+    header: 'ID Artículo',
+    size: '0%',
+    visible: false,
+  },
+  {
+    Field: 'fecha_registro',
+    header: 'Fecha de Registro',
+    size: '10%',
+    visible: true,
+  },
+  {
+    Field: 'procedencia',
+    header: 'Procedencia',
+    size: '30%',
+    visible: true,
+  },
+  {
+    Field: 'industria',
+    header: 'Industria',
+    size: '30%',
+    visible: true,
+  },
+  {
+    Field: 'cod_registro',
+    header: 'Código de Registro',
+    size: '30%',
+    visible: true,
+  },
+]

@@ -54,3 +54,18 @@ export const getArma = () => {
 export const deleteArma = data => {
   return api.delete(`/articulo/arma/${data}`)
 }
+
+//registrar equipo
+export const sendEquipo = data => {
+  return api.post('/articulo/equipo', data)
+}
+
+//borrar equipo
+export const deleteEquipo = data => {
+  return api.delete(`/articulo/equipo/${data}`)
+}
+
+//obtener equipo
+export const getEquipo = () => {
+  return api.get('/articulo/equipo')
+}

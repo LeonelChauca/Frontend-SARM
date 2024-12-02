@@ -78,3 +78,10 @@ export const validateArticuloArma = yup.object({
     .min(1, 'Acabado es obligatorio')
     .required('Acabado es obligatorio'),
 })
+
+export const validateArticuloEquipo = yup.object({
+  cod_registro: yup
+    .string()
+    .min(1, 'Código de registro es obligatorio')
+    .required('Código de registro es obligatorio'),
+})

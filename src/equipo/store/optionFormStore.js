@@ -26,7 +26,7 @@ export const useOptionFormStore = defineStore('optionFormStore', {
         this.estado_fisico.value = response.value.estado_fisico
         this.estado_logico.value = response.value.estado_logico
         this.tipo_articulo.value = response.value.tipo_articulo
-        this.acabado = response.value.acabado
+        this.acabado = response.value?.acabado
       } catch (err) {
         console.error(err)
         this.error = err

@@ -29,7 +29,7 @@
         </StepPanel>
 
         <StepPanel value="3" v-else>
-          <CreateDatosEquipo />
+          <CreateDatosEquipo ref="datosEquipoRef" />
         </StepPanel>
       </StepPanels>
     </Stepper>
@@ -75,8 +75,9 @@ import { useArma } from '../composables/useArma'
 import { useFormStore } from '../store/formStore'
 import { Toaster } from 'vue-sonner'
 import { showToast, showError } from '../helpers/Toast'
+import { useEquipo } from '../composables/useEquipo'
 // Props y Emisiones
-defineProps({
+const props = defineProps({
   dialogVisible: Boolean,
   tipo: String,
 })
@@ -86,6 +87,7 @@ const emit = defineEmits(['update:dialogVisible'])
 const marcaModeloRef = ref(null)
 const datosArticuloRef = ref(null)
 const datosArmaRef = ref(null)
+const datosEquipoRef = ref(null)
 
 // Estado de Pasos
 const currentStep = ref(1)
@@ -107,7 +109,11 @@ const handleNextStep = async () => {
       isValid = await datosArticuloRef.value?.validateForm()
       break
     case 3:
-      isValid = await datosArmaRef.value?.validateForm()
+      if (props.tipo === 'Arma') {
+        isValid = await datosArmaRef.value?.validateForm()
+      } else {
+        isValid = await datosEquipoRef.value?.validateForm()
+      }
       break
   }
   if (isValid.valid) {
@@ -131,19 +137,32 @@ const prevStep = () => {
 }
 
 const { response, SendArma, loading } = useArma()
+const { response_equipo, SendEquipo, loading_response } = useEquipo()
 // Enviar el Formulario
 const submitForm = async () => {
-  const isValidArma = await datosArmaRef.value?.validateForm()
-  if (isValidArma) {
-    await SendArma(data.formData)
-    if (response.value.status === 201) {
-      BorrarDatosFormAll()
-      data.limpiarFormulario()
-      currentStep.value = 1
-      showToast('Artículo registrado correctamente. !')
-    }
-  } else {
-    showError('Error datos no validos en el articulo. !')
+  let isValid
+  switch (props.tipo) {
+    case 'Arma':
+      isValid = await datosArmaRef.value?.validateForm()
+      if (isValid) {
+        await SendArma(data.getDataArma())
+      } else {
+        showError('Error datos no validos en el articulo. !')
+      }
+      break
+    case 'Equipo':
+      isValid = await datosEquipoRef.value?.validateForm()
+      if (isValid) {
+        await SendEquipo(data.getDataEquipo())
+      } else {
+        showError('Error datos no validos en el articulo. !')
+      }
+  }
+  if (response.value.status === 201 || response_equipo.value.status === 201) {
+    BorrarDatosFormAll()
+    data.limpiarFormulario()
+    currentStep.value = 1
+    showToast('Artículo registrado correctamente. !')
   }
 }
 
@@ -151,10 +170,11 @@ const BorrarDatosFormAll = () => {
   marcaModeloRef.value?.borrarDatosFormMarcaModelo()
   datosArticuloRef.value?.borrarDatosFormArticulo()
   datosArmaRef.value?.borrarDatosFormArma()
+  datosEquipoRef.value?.borrarDatosFormEquipo()
 }
 
 // Fetch de Opciones al Montar
 onMounted(async () => {
-  await optionFormStore.fetchOptions('arma')
+  await optionFormStore.fetchOptions(props.tipo.toLowerCase())
 })
 </script>
