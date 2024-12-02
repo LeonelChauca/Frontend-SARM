@@ -7,7 +7,7 @@
     >
       <!-- Marca -->
       <div class="flex flex-col w-[280px] gap-1 h-[70px]">
-        <label for="id_marca" class="text-sm font-semibold"
+        <label for="id_marca" class="text-md font-semibold"
           >Nombre de la marca:</label
         >
         <Select
@@ -17,16 +17,15 @@
           option-value="id_marca"
           optionLabel="nombre_marca"
           placeholder="Selecciona una opción"
-          size="small"
+          size="medium"
         />
         <small class="text-xs text-red-500">
           <ErrorMessage name="id_marca" />
         </small>
       </div>
-
       <!-- Modelo -->
       <div class="flex flex-col w-[280px] gap-1 h-[70px]">
-        <label for="id_modelo" class="text-sm font-semibold"
+        <label for="id_modelo" class="text-md font-semibold"
           >Nombre del Modelo:</label
         >
         <Select
@@ -36,7 +35,7 @@
           option-value="id_modelo"
           optionLabel="nombre_modelo"
           placeholder="Selecciona una opción"
-          size="small"
+          size="medium"
         />
         <small class="text-xs text-red-500">
           <ErrorMessage name="id_modelo" />

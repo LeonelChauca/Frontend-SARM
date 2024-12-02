@@ -1,7 +1,6 @@
 <template>
   <div class="card">
-    <component
-      :is="DataTable"
+    <DataTable
       :value="tableData"
       :paginator="paginator"
       :rows="paginator ? rowsReactive : null"
@@ -39,26 +38,29 @@
             <Skeleton />
           </template>
           <!-- Botón para eliminar -->
-          <Button
+          <ButtonTableComponent
             v-else
-            type="button"
-            icon="pi pi-trash"
-            class="p-button-danger"
-            @click="handleDelete(slotProps.data.id_articulo)"
-            size="small"
+            :deleteApi="onDelete"
+            :data="slotProps.data"
+            :emmitCambio="emmitCambio"
+            :responseDelete="responseDelete"
+            :emit="emit"
           />
         </template>
       </Column>
-    </component>
+    </DataTable>
+    <ConfirmDialog></ConfirmDialog>
+    <Toast />
   </div>
 </template>
 
 <script setup>
+import ConfirmDialog from 'primevue/confirmdialog'
 import { computed, watchEffect } from 'vue'
 import DataTable from 'primevue/datatable'
-import Button from 'primevue/button'
 import Skeleton from 'primevue/skeleton'
 import { ref } from 'vue'
+import ButtonTableComponent from './ButtonTableComponent.vue'
 
 const props = defineProps({
   columns: {
@@ -95,17 +97,9 @@ const props = defineProps({
     default: 5,
   },
 })
-
 // Emitir cambios tras eliminar un elemento
 const emit = defineEmits(['cambios'])
 const rowsReactive = ref(props.rows)
-
-const handleDelete = async value => {
-  console.log(value)
-  await props.onDelete(value)
-  if (!props.responseDelete) return
-  emit('cambios', !props.emmitCambio)
-}
 // Mantener todos los datos en tableData
 const tableData = computed(() => {
   if (props.data.length > 0) {

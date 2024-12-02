@@ -4,8 +4,8 @@
     <form
       class="w-full flex flex-col flex-wrap items-center sm:items-start sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
     >
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="code_registro_arma" class="text-sm"
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="code_registro_arma" class="text-md"
           >Código de registro de arma</label
         >
         <InputGroup>
@@ -24,14 +24,15 @@
         </small>
       </div>
 
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="calibre" class="text-sm">Calibre</label>
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="calibre" class="text-md">Calibre</label>
         <InputGroup>
           <InputText
             class="h-8"
             v-model="calibre"
             placeholder="Calibre"
             id="calibre"
+            size="medium"
           />
           <InputGroupAddon class="h-8">
             <i class="pi pi-compass"></i>
@@ -42,8 +43,8 @@
         </small>
       </div>
 
-      <div class="card flex w-[230px] flex-col gap-3">
-        <label for="procedencia-select" class="text-sm"
+      <div class="flex w-[230px] flex-col gap-3">
+        <label for="procedencia-select" class="text-md"
           >Número de cargador</label
         >
         <Select
@@ -54,7 +55,7 @@
           optionValue="code"
           placeholder="Selecciona cargador"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-exclamation-circle" />
@@ -65,8 +66,8 @@
         </small>
       </div>
 
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="capacidad_cargador" class="text-sm"
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="capacidad_cargador" class="text-md"
           >Capacidad de cargador</label
         >
         <Select
@@ -78,7 +79,7 @@
           optionLabel="nro"
           placeholder="Selecciona capacidad"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-exclamation-circle" />
@@ -93,7 +94,7 @@
           placeholder="NO TIENE"
           disabled
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-exclamation-circle" />
@@ -104,8 +105,8 @@
         </small>
       </div>
 
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="capacidad_tambor" class="text-sm"
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="capacidad_tambor" class="text-md"
           >Capacidad de Tambor</label
         >
         <Select
@@ -117,7 +118,7 @@
           optionValue="nro"
           placeholder="Selecciona capacidad"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-exclamation-circle" />
@@ -132,7 +133,7 @@
           placeholder="NO TIENE"
           disabled
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-exclamation-circle" />
@@ -143,14 +144,15 @@
         </small>
       </div>
 
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="acabado" class="text-sm">Acabado</label>
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="acabado" class="text-md">Acabado</label>
         <InputGroup>
           <InputText
             v-model="acabado"
             class="h-8"
             placeholder="Acabado"
             id="acabado"
+            size="medium"
           />
           <InputGroupAddon class="h-8">
             <i class="pi pi-compass"></i>
@@ -160,14 +162,15 @@
           <ErrorMessage name="acabado" />
         </small>
       </div>
-      <div class="card flex flex-col w-[230px] gap-3">
-        <label for="serie" class="text-sm">Serie</label>
+      <div class="flex flex-col w-[230px] gap-3">
+        <label for="serie" class="text-md">Serie</label>
         <InputGroup>
           <InputText
             v-model="serie"
             class="h-8"
             placeholder="Código de serie"
             id="serie"
+            size="medium"
           />
           <InputGroupAddon class="h-8">
             <i class="pi pi-key"></i>

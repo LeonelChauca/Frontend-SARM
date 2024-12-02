@@ -4,12 +4,16 @@ import 'primeicons/primeicons.css' // Solo una vez
 import { createApp } from 'vue'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
+import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice'
+import DialogService from 'primevue/dialogservice'
 
 import Ripple from 'primevue/ripple'
 import StyleClass from 'primevue/styleclass'
 import { router } from './routes/index'
 
 import Saga from '@primevue/themes/material'
+import './styles/custom-color.css'
 
 const app = createApp(App)
 
@@ -70,6 +74,10 @@ app.use(PrimeVue, {
 })
 app.directive('ripple', Ripple)
 app.directive('styleclass', StyleClass)
+app.use(ConfirmationService)
+app.use(ToastService)
+app.use(DialogService)
+
 app.use(router)
 
 app.mount('#app')

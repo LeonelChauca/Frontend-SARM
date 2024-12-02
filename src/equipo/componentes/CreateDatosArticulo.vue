@@ -4,13 +4,13 @@
     <div
       class="w-full flex flex-col flex-wrap items-center sm:items-start sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
     >
-      <div class="card flex flex-col gap-3 w-[230px]">
-        <label for="date" class="text-sm">Fecha de registro</label>
+      <div class="flex flex-col gap-3 w-[230px]">
+        <label for="date" class="text-md">Fecha de registro</label>
         <DatePicker
           id="fecha_registro"
           v-model="fecha_registro"
-          class="h-8"
-          size="small"
+          class="h-8 w-full"
+          size="medium"
           placeholder="Ingrese la fecha"
           showIcon
         />
@@ -19,8 +19,8 @@
         </small>
       </div>
 
-      <div class="card flex w-[230px] flex-col gap-3">
-        <label for="procedencia" class="text-sm">Procedencia</label>
+      <div class="flex w-[230px] flex-col gap-3">
+        <label for="procedencia" class="text-md">Procedencia</label>
         <Select
           v-model="procedencia"
           id="procedencia-select"
@@ -29,7 +29,7 @@
           optionLabel="nombre"
           placeholder="Selecciona Procedencia"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-map" />
@@ -39,8 +39,8 @@
           <ErrorMessage name="procedencia" />
         </small>
       </div>
-      <div class="card w-[230px] flex flex-col gap-3">
-        <label for="procedencia-select" class="text-sm">Industria</label>
+      <div class="w-[230px] flex flex-col gap-3">
+        <label for="procedencia-select" class="text-md">Industria</label>
         <Select
           v-model="industria"
           id="procedencia-select"
@@ -49,7 +49,7 @@
           optionLabel="nombre"
           placeholder="Selecciona Industria"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-map" />
@@ -59,8 +59,8 @@
           <ErrorMessage name="industria" />
         </small>
       </div>
-      <div class="card w-[230px] flex flex-col gap-3">
-        <label for="id_estado_fisico" class="text-sm">Estado Fisico</label>
+      <div class="w-[230px] flex flex-col gap-3">
+        <label for="id_estado_fisico" class="text-md">Estado Fisico</label>
         <Select
           v-model="est_fisico"
           id="id_estado_fisico"
@@ -69,7 +69,7 @@
           optionLabel="nombre_estado_fisico"
           placeholder="Selecciona Industria"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-map" />
@@ -79,8 +79,8 @@
           <ErrorMessage name="id_estado_fisico" />
         </small>
       </div>
-      <div class="card w-[230px] flex flex-col gap-3">
-        <label for="procedencia-select" class="text-sm">Estado Logico</label>
+      <div class="w-[230px] flex flex-col gap-3">
+        <label for="procedencia-select" class="text-md">Estado Logico</label>
         <Select
           v-model="est_logico"
           id="procedencia-select"
@@ -89,7 +89,7 @@
           optionLabel="nombre_estado_logico"
           placeholder="Selecciona Industria"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-map" />
@@ -99,8 +99,8 @@
           <ErrorMessage name="id_estado_logico" />
         </small>
       </div>
-      <div class="card w-[230px] flex flex-col gap-3">
-        <label for="procedencia-select" class="text-sm">Tipo de articulo</label>
+      <div class="w-[230px] flex flex-col gap-3">
+        <label for="procedencia-select" class="text-md">Tipo de articulo</label>
         <Select
           v-model="tp_articulo"
           id="procedencia-select"
@@ -109,7 +109,7 @@
           optionLabel="nombre_tipo_articulo"
           placeholder="Selecciona Industria"
           class="w-full h-8 items-center"
-          size="small"
+          size="medium"
         >
           <template #dropdownicon>
             <i class="pi pi-map" />
