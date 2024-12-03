@@ -2,7 +2,7 @@
   <div class="w-[90%] mx-auto h-full">
     <h3 class="font-semibold">Registro de Marca y Modelo</h3>
     <form
-      class="w-full flex flex-col items-center sm:items-start sm:flex-row gap-8 sm:justify-between lg:w-[90%] mx-auto my-3"
+      class="w-full flex flex-col items-center sm:items-start sm:flex-row gap-8 sm:justify-between lg:w-[90%] lg:justify-evenly mx-auto my-3"
       @submit.prevent="validarStep"
     >
       <!-- Marca -->
@@ -14,10 +14,11 @@
           id="id_marca"
           v-model="id_marca"
           :options="optionsMarca"
+          class="w-full h-8 items-center"
           option-value="id_marca"
           optionLabel="nombre_marca"
           placeholder="Selecciona una opción"
-          size="medium"
+          size=" medium"
         />
         <small class="text-xs text-red-500">
           <ErrorMessage name="id_marca" />
@@ -31,6 +32,7 @@
         <Select
           id="id_modelo"
           v-model="id_modelo"
+          class="w-full h-8 items-center"
           :options="optionsModelo"
           option-value="id_modelo"
           optionLabel="nombre_modelo"
@@ -46,11 +48,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useForm, ErrorMessage, useField } from 'vee-validate'
 import { useOptionFormStore } from '../store/optionFormStore'
 import { useFormStore } from '../store/formStore'
 import { validateRegistroMarcaModelo } from '../helpers/yupValidations'
+const props = defineProps({
+  data: Object,
+})
 // Almacén de opciones
 const optionFormStore = useOptionFormStore()
 const { modelo, marca } = optionFormStore
@@ -59,11 +64,10 @@ const optionsMarca = ref([...marca.value])
 const optionsModelo = ref([...modelo.value])
 // Emitir validez al componente padre
 const emit = defineEmits(['valid'])
-
 // Configuración del formulario
 const { validate, resetForm } = useForm({
   validationSchema: validateRegistroMarcaModelo,
-  initialValues: {
+  initialValues: props.data || {
     id_marca: 0,
     id_modelo: 0,
   },
@@ -103,4 +107,8 @@ watch(
   },
   { deep: true }, // Necesario para observar cambios en objetos anidados
 )
+
+onMounted(() => {
+  props.data && formStore.setInitialMarcaModelo(props.data)
+})
 </script>

@@ -55,6 +55,11 @@ export const deleteArma = data => {
   return api.delete(`/articulo/arma/${data}`)
 }
 
+//editar arma
+export const editArma = (id, data) => {
+  return api.patch(`/articulo/arma/${id}`, data)
+}
+
 //registrar equipo
 export const sendEquipo = data => {
   return api.post('/articulo/equipo', data)

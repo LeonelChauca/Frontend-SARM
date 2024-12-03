@@ -22,6 +22,25 @@ export const useFormStore = defineStore('formStore', {
     },
   }),
   actions: {
+    initialData(data) {
+      this.formData = {
+        fecha_registro: data.fecha_registro,
+        procedencia: data.procedencia,
+        industria: data.industria,
+        id_marca: data.id_marca,
+        id_modelo: data.id_modelo,
+        id_estado_fisico: data.id_estado_fisico,
+        id_estado_logico: data.id_estado_logico,
+        id_tipo_articulo: data.id_tipo_articulo,
+        cod_registro: data.cod_registro,
+        serie: data.serie,
+        calibre: data.calibre,
+        nro_cargador: data.nro_cargador,
+        capacidad_cargador: data.capacidad_cargador,
+        capacidad_tambor: data.capacidad_tambor,
+        acabado: data.acabado,
+      }
+    },
     actualizarCampo(campo, valor) {
       this.formData[campo] = valor
     },
@@ -74,8 +93,30 @@ export const useFormStore = defineStore('formStore', {
         nro_cargador: this.formData.nro_cargador,
         capacidad_cargador: this.formData.capacidad_cargador,
         capacidad_tambor: this.formData.capacidad_tambor,
-        acabado: this.formData.acab,
+        acabado: this.formData.acabado,
       }
+    },
+    setInitialMarcaModelo(data) {
+      this.formData.id_marca = data.id_marca
+      this.formData.id_modelo = data.id_modelo
+    },
+    setInitialArticulo(data) {
+      this.formData.fecha_registro = data.fecha_registro
+      this.formData.procedencia = data.procedencia
+      this.formData.industria = data.industria
+      this.formData.id_estado_fisico = data.id_estado_fisico
+      this.formData.id_estado_logico = data.id_estado_logico
+      this.formData.id_tipo_articulo = data.id_tipo_articulo
+    },
+
+    setInitialArma(data) {
+      this.formData.cod_registro = data.cod_registro
+      this.formData.calibre = data.calibre
+      this.formData.nro_cargador = data.nro_cargador
+      this.formData.capacidad_cargador = data.capacidad_cargador
+      this.formData.capacidad_tambor = data.capacidad_tambor
+      this.formData.acabado = data.acabado
+      this.formData.serie = data.serie
     },
   },
 })

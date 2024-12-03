@@ -2,7 +2,7 @@
   <div class="w-[90%] mx-auto h-full">
     <h3 class="font-semibold">Registro de Articulo</h3>
     <div
-      class="w-full flex flex-col flex-wrap items-center sm:items-start sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
+      class="w-full flex flex-col flex-wrap items-center sm:items-start lg:justify-between sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
     >
       <div class="flex flex-col gap-3 w-[230px]">
         <label for="date" class="text-md">Fecha de registro</label>
@@ -123,7 +123,7 @@
   </div>
 </template>
 <script setup>
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import {
   dataSelectIndustria,
   dataSelectProcedencia,
@@ -134,9 +134,12 @@ import { useOptionFormStore } from '../store/optionFormStore'
 import { useForm, useField, ErrorMessage } from 'vee-validate'
 const { estado_fisico, estado_logico, tipo_articulo } = useOptionFormStore()
 
+const props = defineProps({
+  data: Object,
+})
 const { validate, resetForm } = useForm({
   validationSchema: validateArticulo,
-  initialValues: {
+  initialValues: props.data || {
     fecha_registro: '',
     procedencia: '',
     industria: '',
@@ -190,4 +193,8 @@ watch(
   },
   { deep: true }, // Necesario para observar cambios en objetos anidados
 )
+
+onMounted(() => {
+  props.data && formStore.setInitialArticulo(props.data)
+})
 </script>

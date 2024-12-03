@@ -61,7 +61,6 @@ import DataTable from 'primevue/datatable'
 import Skeleton from 'primevue/skeleton'
 import { ref } from 'vue'
 import ButtonTableComponent from './ButtonTableComponent.vue'
-
 const props = defineProps({
   columns: {
     type: Array,

@@ -4,7 +4,7 @@
     <form
       class="w-full flex flex-col flex-wrap items-center sm:items-start sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
     >
-      <div class="card flex flex-col w-[230px] gap-3">
+      <div class="flex flex-col w-[230px] gap-3">
         <label for="code_registro_arma" class="text-sm"
           >Código de registro de arma</label
         >

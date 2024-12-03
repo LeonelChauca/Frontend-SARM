@@ -2,7 +2,7 @@
   <div class="w-[90%] mx-auto h-full">
     <h3 class="font-semibold">Datos del Arma</h3>
     <form
-      class="w-full flex flex-col flex-wrap items-center sm:items-start sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
+      class="w-full flex flex-col flex-wrap items-center sm:items-start lg:justify-between sm:flex-row gap-4 lg:w-[90%] mx-auto my-3"
     >
       <div class="flex flex-col w-[230px] gap-3">
         <label for="code_registro_arma" class="text-md"
@@ -185,7 +185,7 @@
 </template>
 
 <script setup>
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import {
   dataSelectNCargador,
   dataSelectNroCargador,
@@ -195,11 +195,14 @@ import { useForm, useField, ErrorMessage } from 'vee-validate'
 import { useFormStore } from '../store/formStore'
 import { validateArticuloArma } from '../helpers/yupValidations'
 
+const props = defineProps({
+  data: Object,
+})
 const emit = defineEmits(['valid'])
 
 const { validate, resetForm } = useForm({
   validationSchema: validateArticuloArma,
-  initialValues: {
+  initialValues: props.data || {
     cod_registro: '',
     calibre: '',
     acabado: '',
@@ -267,4 +270,8 @@ watch(
     formStore.actualizarCampo('capacidad_tambor', newCapacidadTambor)
   },
 )
+
+onMounted(() => {
+  props.data && formStore.setInitialArma(props.data)
+})
 </script>

@@ -137,7 +137,7 @@ const prevStep = () => {
 }
 
 const { response, SendArma, loading } = useArma()
-const { response_equipo, SendEquipo, loading_response } = useEquipo()
+const { response_equipo, SendEquipo } = useEquipo()
 // Enviar el Formulario
 const submitForm = async () => {
   let isValid
@@ -145,6 +145,7 @@ const submitForm = async () => {
     case 'Arma':
       isValid = await datosArmaRef.value?.validateForm()
       if (isValid) {
+        console.log('holaaafinall;', data.getDataArma())
         await SendArma(data.getDataArma())
       } else {
         showError('Error datos no validos en el articulo. !')

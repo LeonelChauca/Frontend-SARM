@@ -12,15 +12,24 @@
       type="button"
       icon="pi pi-pencil"
       class="p-button-edit"
-      @click="handleEdit(data.id_articulo)"
+      @click="handleEdit(data)"
       size="small"
     />
   </div>
+  <DialogEditComponent
+    v-if="dialogVisible"
+    :dialogVisible="dialogVisible"
+    :data="data"
+    @update:dialogVisible="dialogVisible = $event"
+  />
 </template>
 <script setup>
 import Button from 'primevue/button'
+import { ref } from 'vue'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
+import DialogEditComponent from './DialogEditComponent.vue'
+const dialogVisible = ref(false)
 
 const confirm = useConfirm()
 const toast = useToast()
@@ -33,18 +42,15 @@ const props = defineProps({
 })
 
 const handleDelete = async value => {
-  console.log(value)
   await props.deleteApi(value)
   if (!props.responseDelete) return
   props.emit('cambios', !props.emmitCambio)
 }
 //editar
-const handleEdit = async value => {
-  console.log(value)
+const handleEdit = async () => {
+  dialogVisible.value = true
 }
-
 //funciones de dialog confirmacion
-
 const confirmDelete = data => {
   confirm.require({
     message: '¿Estás seguro de que deseas eliminar esta fila?',
@@ -72,8 +78,8 @@ const confirmDelete = data => {
     reject: () => {
       toast.add({
         severity: 'error',
-        summary: 'Rejected',
-        detail: 'You have rejected',
+        summary: 'Cancelado',
+        detail: 'Se cancelo el proceso',
         life: 3000,
       })
     },

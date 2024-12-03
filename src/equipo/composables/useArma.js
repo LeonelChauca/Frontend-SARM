@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { sendArma, getArma, deleteArma } from '../services/api'
+import { sendArma, getArma, deleteArma, editArma } from '../services/api'
 
 export function useArma() {
   const response = ref('')
@@ -13,6 +13,10 @@ export function useArma() {
   const responseDelete = ref({})
   const errorDelete = ref(null)
   const loadingDelete = ref(false)
+
+  const responseEdit = ref({})
+  const errorEdit = ref(null)
+  const loadingEdit = ref(false)
 
   // Función
   const SendArma = async data => {
@@ -54,6 +58,19 @@ export function useArma() {
     }
   }
 
+  const EditArma = async (id, data) => {
+    loadingEdit.value = true
+    try {
+      const res = await editArma(id, data)
+      console.log(res.data)
+      responseEdit.value = res
+    } catch (err) {
+      errorEdit.value = err
+    } finally {
+      loadingEdit.value = false
+    }
+  }
+
   return {
     response,
     error,
@@ -67,8 +84,13 @@ export function useArma() {
     errorDelete,
     loadingDelete,
 
+    responseEdit,
+    errorEdit,
+    loadingEdit,
+
     SendArma,
     GetArma,
     DeleteArma,
+    EditArma,
   }
 }
