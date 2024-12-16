@@ -198,7 +198,6 @@ import { validateArticuloArma } from '../helpers/yupValidations'
 const props = defineProps({
   data: Object,
 })
-const emit = defineEmits(['valid'])
 
 const { validate, resetForm } = useForm({
   validationSchema: validateArticuloArma,

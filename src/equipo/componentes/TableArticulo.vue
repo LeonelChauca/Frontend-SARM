@@ -45,6 +45,7 @@
             :emmitCambio="emmitCambio"
             :responseDelete="responseDelete"
             :emit="emit"
+            :tipo="tipo"
           />
         </template>
       </Column>
@@ -94,6 +95,10 @@ const props = defineProps({
   rows: {
     type: Number,
     default: 5,
+  },
+  tipo: {
+    type: String,
+    default: 'Arma',
   },
 })
 // Emitir cambios tras eliminar un elemento

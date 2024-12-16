@@ -1,5 +1,10 @@
 import { ref } from 'vue'
-import { deleteEquipo, getEquipo, sendEquipo } from '../services/api'
+import {
+  deleteEquipo,
+  editEquipo,
+  getEquipo,
+  sendEquipo,
+} from '../services/api'
 export function useEquipo() {
   const response_equipo = ref('')
   const error_equipo = ref(null)
@@ -10,6 +15,11 @@ export function useEquipo() {
   const responseDelete = ref({})
   const errorDelete = ref(null)
   const loadingDelete = ref(false)
+
+  const responseEquipoEdit = ref('')
+  const errorEquipoEdit = ref(null)
+  const loadingEquipoEdit = ref(false)
+
   const SendEquipo = async data => {
     loading_equipo.value = true
     try {
@@ -43,6 +53,18 @@ export function useEquipo() {
       loadingDelete.value = false
     }
   }
+
+  const EditEquipo = async (id, data) => {
+    loadingEquipoEdit.value = true
+    try {
+      const res = await editEquipo(id, data)
+      responseEquipoEdit.value = res
+    } catch (err) {
+      errorEquipoEdit.value = err
+    } finally {
+      loadingEquipoEdit.value = false
+    }
+  }
   return {
     loading_equipo,
     response_equipo,
@@ -53,8 +75,13 @@ export function useEquipo() {
     responseDelete,
     errorDelete,
     loadingDelete,
+    responseEquipoEdit,
+    errorEquipoEdit,
+    loadingEquipoEdit,
+
     SendEquipo,
     GetEquipo,
     DeleteEquipo,
+    EditEquipo,
   }
 }

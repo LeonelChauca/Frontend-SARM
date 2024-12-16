@@ -11,7 +11,9 @@
     <template #header>
       <div class="w-full border-l-[4px] border-orange-500">
         <hr class="bg-orange-500 h-[4px]" />
-        <h3 class="px-4 font-semibold text-2xl uppercase py-4">Editar Arma</h3>
+        <h3 class="px-4 font-semibold text-2xl uppercase py-4">
+          Editar {{ tipo }}
+        </h3>
       </div>
     </template>
     <div class="flex flex-col items-center justify-center">
@@ -34,6 +36,7 @@
         }"
       />
       <CreateDatosArma
+        v-if="tipo === 'Arma'"
         ref="datosArmaRef"
         :data="{
           cod_registro: data.cod_registro,
@@ -43,6 +46,13 @@
           capacidad_tambor: data.capacidad_tambor,
           acabado: data.acabado,
           serie: data.serie,
+        }"
+      />
+      <CreateDatosEquipo
+        v-else
+        ref="datosEquipoRef"
+        :data="{
+          cod_registro: data.cod_registro,
         }"
       />
     </div>
@@ -61,38 +71,57 @@ import { useArma } from '../composables/useArma'
 import CreateDatosArma from './CreateDatosArma.vue'
 import CreateDatosArticulo from './CreateDatosArticulo.vue'
 import CreateDatosModelo from './CreateMarcaModelo.vue'
+import CreateDatosEquipo from './CreateDatosEquipo.vue'
 import { showToast, showError } from '../helpers/Toast'
 
 import { useFormStore } from '../store/formStore'
 import { ref } from 'vue'
+import { useEquipo } from '../composables/useEquipo'
 const props = defineProps({
   data: Object,
   dialogVisible: Boolean,
+  tipo: String,
 })
+
+console.log('tipooooo', props.tipo)
 const data_final = useFormStore()
 // Referencias de Componentes Hijos
 const marcaModeloRef = ref(null)
 const datosArticuloRef = ref(null)
 const datosArmaRef = ref(null)
+const datosEquipoRef = ref(null)
 //const datosEquipoRef = ref(null)
 
 const { EditArma, responseEdit, loadingEdit } = useArma()
+const { EditEquipo, responseEquipoEdit, loadingEquipoEdit, errorEquipoEdit } =
+  useEquipo()
 
-if (props.dialogVisible) {
-  console.log('dialogVisibleeeeeeeeeee', props.data)
-}
-console.log(props.data)
 const emit = defineEmits(['update:dialogVisible'])
 
 const submitEdits = async () => {
   try {
     const isValid = await isValidateAll()
-    if (!isValid) {
-      return showError('Error datos no actualizados.!')
-    }
-    await EditArma(props.data.id_articulo, data_final.getDataArma())
+    if (!isValid) return showError('Error datos no actualizados.!')
 
-    if (responseEdit.value.status === 200) {
+    switch (props.tipo) {
+      case 'Arma':
+        await EditArma(props.data.id_articulo, data_final.getDataArma())
+        break
+      case 'Equipo':
+        console.log(
+          'entro a equipo',
+          props.data.id_articulo,
+          data_final.getDataEquipo(),
+        )
+        await EditEquipo(props.data.id_articulo, data_final.getDataEquipo())
+        console.log(errorEquipoEdit.value)
+        break
+    }
+
+    if (
+      responseEdit.value.status === 200 ||
+      responseEquipoEdit.value.status === 200
+    ) {
       showToast('Datos Actualizados correctamente')
       emit('update:dialogVisible', false)
     } else {
@@ -108,7 +137,9 @@ const isValidateAll = async () => {
   const validations = [
     marcaModeloRef.value?.validateForm(),
     datosArticuloRef.value?.validateForm(),
-    datosArmaRef.value?.validateForm(),
+    props.tipo === 'Arma'
+      ? datosArmaRef.value?.validateForm()
+      : datosEquipoRef.value?.validateForm(),
   ]
   const results = await Promise.all(validations)
   return results.every(result => result)

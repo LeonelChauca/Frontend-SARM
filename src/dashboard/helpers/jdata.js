@@ -32,4 +32,8 @@ export const dashboardPrueba = [
       },
     ],
   },
+  {
+    nombre: ' OFICIALES',
+    icono: 'pi pi-user',
+  },
 ]

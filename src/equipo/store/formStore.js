@@ -118,5 +118,8 @@ export const useFormStore = defineStore('formStore', {
       this.formData.acabado = data.acabado
       this.formData.serie = data.serie
     },
+    setInitialEquipo(data) {
+      this.formData.cod_registro = data.cod_registro
+    },
   },
 })

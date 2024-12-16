@@ -32,6 +32,7 @@
         :emmitCambio="swcambios"
         :responseDelete="responseDelete"
         @cambios="swcambios = $event"
+        tipo="Arma"
       />
     </section>
   </TemplateComponent>

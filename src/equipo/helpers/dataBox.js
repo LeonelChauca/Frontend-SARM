@@ -1,26 +1,15 @@
 import armaImg from '@assets/arma.jpg'
 import equipoImg from '@assets/equipo.jpg'
-import marcaImg from '@assets/marca.jpg'
-import modeloImg from '@assets/modelo.jpg'
+
 export const dataBox = [
   {
-    titulo: 'Armas',
+    titulo: 'Armamento',
     img: armaImg,
-    urlBoton: '/dashboard/configuracionEquipo/armas',
+    urlBoton: '/dashboard/configuracionEquipo/arma',
   },
   {
-    titulo: 'Equipos',
+    titulo: 'Equipo',
     img: equipoImg,
-    urlBoton: '/dashboard/configuracionEquipo/equipos',
-  },
-  {
-    titulo: 'Marcas',
-    img: marcaImg,
-    urlBoton: '/dashboard/configuracionEquipo/marca',
-  },
-  {
-    titulo: 'Modelos',
-    img: modeloImg,
-    urlBoton: '/dashboard/configuracionEquipo/modelos',
+    urlBoton: '/dashboard/configuracionEquipo/equipo',
   },
 ]

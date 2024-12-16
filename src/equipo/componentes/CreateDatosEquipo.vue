@@ -6,7 +6,7 @@
     >
       <div class="flex flex-col w-[230px] gap-3">
         <label for="code_registro_arma" class="text-sm"
-          >Código de registro de arma</label
+          >Código de registro de Equipo</label
         >
         <InputGroup>
           <InputText
@@ -27,13 +27,18 @@
   </div>
 </template>
 <script setup>
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useForm, useField, ErrorMessage } from 'vee-validate'
 import { validateArticuloEquipo } from '../helpers/yupValidations'
 import { useFormStore } from '../store/formStore'
+
+const props = defineProps({
+  data: Object,
+})
+
 const { validate, resetForm } = useForm({
   validationSchema: validateArticuloEquipo,
-  initialValues: {
+  initialValues: props.data || {
     cod_registro: '',
   },
 })
@@ -55,5 +60,9 @@ const formStore = useFormStore()
 
 watch([cod_registro], ([newCod_registro]) => {
   formStore.actualizarCampo('cod_registro', newCod_registro)
+})
+
+onMounted(() => {
+  props.data && formStore.setInitialEquipo(props.data)
 })
 </script>

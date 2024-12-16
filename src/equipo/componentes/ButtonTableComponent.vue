@@ -18,6 +18,7 @@
   </div>
   <DialogEditComponent
     v-if="dialogVisible"
+    :tipo="tipo"
     :dialogVisible="dialogVisible"
     :data="data"
     @update:dialogVisible="dialogVisible = $event"
@@ -39,6 +40,7 @@ const props = defineProps({
   emmitCambio: Boolean,
   emit: Function,
   responseDelete: Object,
+  tipo: String,
 })
 
 const handleDelete = async value => {

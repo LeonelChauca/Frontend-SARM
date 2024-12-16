@@ -32,6 +32,7 @@
         :onDelete="DeleteEquipo"
         :emmitCambio="swcambios"
         :responseDelete="responseDelete"
+        tipo="Equipo"
         @cambios="swcambios = $event"
       />
     </section>

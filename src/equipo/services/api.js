@@ -74,3 +74,7 @@ export const deleteEquipo = data => {
 export const getEquipo = () => {
   return api.get('/articulo/equipo')
 }
+//editar equipo
+export const editEquipo = (id, data) => {
+  return api.patch(`/articulo/equipo/${id}`, data)
+}

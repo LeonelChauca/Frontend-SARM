@@ -19,40 +19,63 @@ const routes = [
     component: () => import('../dashboard/views/DashboardView.vue'),
     children: [
       {
-        path: 'verequipo',
-        name: 'equipo',
-        component: () => import('../equipo/layout/EquipoLayout.vue'),
-      },
-      {
         path: 'configuracionEquipo',
         name: 'configuracionEquipo',
         component: () =>
           import('../equipo/views/DashboardConfiguracionView.vue'),
         children: [
           {
-            path: 'armas',
-            name: 'armas',
-            component: () =>
-              import('../equipo/views/ConfiguracionArmaView.vue'),
+            path: 'arma',
+            name: 'arma',
+            component: () => import('../equipo/layout/ConfArmamentoLayout.vue'),
+            children: [
+              {
+                path: 'verarmas',
+                name: 'verarmas',
+                component: () =>
+                  import('../equipo/views/ConfiguracionArmaView.vue'),
+              },
+              {
+                path: 'marca',
+                name: 'marca',
+                component: () =>
+                  import('../equipo/views/ConfiguracionMarcaView.vue'),
+              },
+              {
+                path: 'modelo',
+                name: 'modelos',
+                component: () =>
+                  import('../equipo/views/ConfiguracionModeloView.vue'),
+              },
+            ],
           },
           {
-            path: 'equipos',
-            name: 'equipos',
+            path: 'equipo',
+            name: 'equipo',
             component: () =>
-              import('../equipo/views/ConfiguracionEquipoView.vue'),
+              import('../equipo/layout/ConfEquipamientoLayout.vue'),
+            children: [
+              {
+                path: 'verequipos',
+                name: 'verequipos',
+                component: () =>
+                  import('../equipo/views/ConfiguracionEquipoView.vue'),
+              },
+              {
+                path: 'marca-equipo',
+                name: 'marcaequipo',
+                component: () =>
+                  import('../equipo/views/ConfiguracionMarcaView.vue'),
+              },
+              {
+                path: 'modelo-equipo',
+                name: 'modeloequipo',
+                component: () =>
+                  import('../equipo/views/ConfiguracionModeloView.vue'),
+              },
+            ],
           },
-          {
-            path: 'marca',
-            name: 'marca',
-            component: () =>
-              import('../equipo/views/ConfiguracionMarcaView.vue'),
-          },
-          {
-            path: 'modelos',
-            name: 'modelos',
-            component: () =>
-              import('../equipo/views/ConfiguracionModeloView.vue'),
-          },
+
           // {
           //   path: 'configuracion',
           //   name: 'config-equipo',
