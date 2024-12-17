@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   --body-bg: var(--p-surface-50);
   --body-text-color: var(--p-surface-900);
@@ -45,6 +46,9 @@ body {
 }
 
 /* colores custom para la web */
+.p-button {
+  @apply bg-green-600 hover:bg-green-700 text-white px-4 py-2 !important;
+}
 .p-button-edit {
   @apply bg-orange-500 rounded-xl !important;
 }

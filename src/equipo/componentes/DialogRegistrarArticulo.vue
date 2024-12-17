@@ -64,8 +64,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, provide } from 'vue'
-import { createPinia } from 'pinia'
+import { ref, onMounted } from 'vue'
 import { useOptionFormStore } from '../store/optionFormStore'
 import CreateDatosArma from './CreateDatosArma.vue'
 import CreateDatosArticulo from './CreateDatosArticulo.vue'
@@ -93,9 +92,7 @@ const datosEquipoRef = ref(null)
 const currentStep = ref(1)
 const totalSteps = 3
 // Almacenamiento con Pinia
-const pinia = createPinia()
-provide('pinia', pinia)
-const optionFormStore = useOptionFormStore(pinia)
+const optionFormStore = useOptionFormStore()
 const data = useFormStore()
 // Validar Datos al Cambiar Paso
 const handleNextStep = async () => {

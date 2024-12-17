@@ -1,5 +1,6 @@
 import './assets/main.css'
 import 'primeicons/primeicons.css' // Solo una vez
+import { createPinia } from 'pinia'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -16,6 +17,7 @@ import Saga from '@primevue/themes/material'
 import './styles/custom-color.css'
 
 const app = createApp(App)
+const pinia = createPinia()
 
 app.use(PrimeVue, {
   theme: {
@@ -74,9 +76,11 @@ app.use(PrimeVue, {
 })
 app.directive('ripple', Ripple)
 app.directive('styleclass', StyleClass)
+
 app.use(ConfirmationService)
 app.use(ToastService)
 app.use(DialogService)
+app.use(pinia) // Configura Pinia a nivel global
 
 app.use(router)
 

@@ -9,7 +9,7 @@
       'h-30',
     ]"
   >
-    <div class="text-center text-2xl font-semibold">
+    <div class="text-center text-lg font-semibold">
       <h1 class="uppercase">{{ title }}</h1>
     </div>
     <div class="text-center text-3xl font-bold font-sans">

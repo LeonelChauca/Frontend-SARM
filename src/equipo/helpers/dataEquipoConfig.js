@@ -12,11 +12,11 @@ export const dataEquipoConfig = [
   {
     titulo: 'Marcas',
     img: marcaImg,
-    urlBoton: '/dashboard/configuracionEquipo/equipo/marca-equipo',
+    urlBoton: '/dashboard/configuracionEquipo/equipo/marca',
   },
   {
     titulo: 'Modelos',
     img: modeloImg,
-    urlBoton: '/dashboard/configuracionEquipo/equipo/modelo-equipo',
+    urlBoton: '/dashboard/configuracionEquipo/equipo/modelo',
   },
 ]

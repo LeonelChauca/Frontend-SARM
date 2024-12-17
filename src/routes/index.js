@@ -62,13 +62,13 @@ const routes = [
                   import('../equipo/views/ConfiguracionEquipoView.vue'),
               },
               {
-                path: 'marca-equipo',
+                path: 'marca',
                 name: 'marcaequipo',
                 component: () =>
                   import('../equipo/views/ConfiguracionMarcaView.vue'),
               },
               {
-                path: 'modelo-equipo',
+                path: 'modelo',
                 name: 'modeloequipo',
                 component: () =>
                   import('../equipo/views/ConfiguracionModeloView.vue'),
