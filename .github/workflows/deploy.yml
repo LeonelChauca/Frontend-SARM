@@ -28,6 +28,9 @@ jobs:
   deploy:
     name: Deploy Docker Image to Server
     needs: build-and-push # Este trabajo depende de "build-and-push"
+    permissions:
+      contents: read
+      packages: write
     runs-on: ubuntu-latest
 
     steps:
