@@ -49,7 +49,7 @@ jobs:
           send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
           expect {
               "Downloaded newer image" { exp_continue }
-              "$ " { }  # Espera a que el prompt vuelva después de que `docker pull` termine.
+              "$ " { } 
           }
           send "sudo docker stop arm || true && sudo docker rm arm || true\r"
           expect "$ "
