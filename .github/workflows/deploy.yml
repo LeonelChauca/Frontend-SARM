@@ -46,12 +46,10 @@ jobs:
           expect "password:"
           send "${{ secrets.SERVER_PASSWORD }}\r"
           expect "$ "
-          send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-          expect {
-            -re "Downloaded newer image.*" { exp_continue }  
-            -re "Image is up to date.*" { exp_continue }   
-            "$ " { }                                       
-          }
+          send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest > /tmp/docker_pull.log 2>&1 &\r"
+          expect "$ "
+          send "wait\r"  # Esperar a que el proceso en segundo plano termine.
+          expect "$ "
           send "sudo docker stop arm || true && sudo docker rm arm || true\r"
           expect "$ "
           send "sudo docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
