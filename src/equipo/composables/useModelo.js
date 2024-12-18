@@ -29,10 +29,10 @@ export function useModelo() {
     }
   }
 
-  const GetModelo = async () => {
+  const GetModelo = async data => {
     loadingGet.value = true
     try {
-      const res = await getModelo()
+      const res = await getModelo(data)
       console.log('este es ', res.data)
       responseGet.value = res.data
     } catch (err) {

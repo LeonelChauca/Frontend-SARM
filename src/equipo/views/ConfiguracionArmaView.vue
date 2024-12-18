@@ -1,6 +1,6 @@
 <template>
   <TemplateComponent>
-    <main class="flex w=[90%] mx-auto mt-5">
+    <main class="flex w=[100%] mx-auto mt-5">
       <section class="flex gap-6 w-full justify-center">
         <CardComponent
           title="total de armas"

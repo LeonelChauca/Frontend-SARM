@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isMainRoute"
-    class="w-[85%] mx-auto mt-16 flex gap-10 flex-wrap flex-row justify-center"
+    class="w-[85%] mx-auto mt-16 flex md:justify-evenly md:flex-row gap-3 flex-col"
   >
     <BoxComponent
       v-for="dtBox in dataArmaConfig"
@@ -28,6 +28,6 @@ const isMainRoute = computed(
   () => route.path === '/dashboard/configuracionEquipo/arma',
 )
 function navigateTo(url) {
-  router.push(url)
+  router.push({ path: url, query: { type: 'arma' } })
 }
 </script>

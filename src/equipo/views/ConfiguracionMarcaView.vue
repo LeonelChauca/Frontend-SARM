@@ -70,7 +70,8 @@ import { useMarca } from '../composables/useMarca'
 import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import CTableComponent from '../componentes/CTableComponent.vue'
-
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const {
   error,
   loading,
@@ -96,7 +97,7 @@ const { value: tipo, errorMessage: tipoError } = useField('tipo')
 watch(
   sw_cambios,
   async () => {
-    await GetMarca()
+    await GetMarca(route.query.type)
     data.value = responseGet.value.map(value => {
       return {
         nombre_marca: value.nombre_marca,

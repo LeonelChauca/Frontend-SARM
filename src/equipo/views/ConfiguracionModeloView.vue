@@ -70,7 +70,9 @@ import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import CTableComponent from '../componentes/CTableComponent.vue'
 import { useModelo } from '../composables/useModelo'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const {
   error,
   loading,
@@ -92,7 +94,7 @@ const { handleSubmit } = useForm({
 watch(
   sw_cambios,
   async () => {
-    await GetModelo()
+    await GetModelo(route.query.type)
     data.value = responseGet.value.map(value => {
       return {
         nombre_modelo: value.nombre_modelo,

@@ -17,7 +17,6 @@ export const dashboardPrueba = [
   },
   {
     nombre: ' UNIDAD POLICIAL',
-    ruta: '/unidad-policial',
     icono: 'pi pi-home',
     rutasHijas: [
       {
@@ -27,7 +26,7 @@ export const dashboardPrueba = [
       },
       {
         nombre: 'Configuracion',
-        ruta: ' /configuracionUPolicial',
+        ruta: '/configuracionUpolicial',
         icono: 'pi pi-cog',
       },
     ],
@@ -35,5 +34,17 @@ export const dashboardPrueba = [
   {
     nombre: ' OFICIALES',
     icono: 'pi pi-user',
+    rutasHijas: [
+      {
+        nombre: 'Listado',
+        ruta: '/verequipo',
+        icono: 'pi pi-list',
+      },
+      {
+        nombre: 'Configuracion',
+        ruta: '/configuracionOficiales',
+        icono: ' pi pi-cog',
+      },
+    ],
   },
 ]

@@ -31,7 +31,7 @@
             v-else
             type="button"
             icon="pi pi-trash"
-            class="p-button-danger"
+            class="p-button-delete"
             @click="handleDelete(slotProps.data.id)"
             size="small"
           />

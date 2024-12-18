@@ -13,8 +13,8 @@ export const sendMarca = data => {
   return api.post('/articulo/marca', data)
 }
 //obtener marca
-export const getMarca = () => {
-  return api.get('/articulo/marca')
+export const getMarca = data => {
+  return api.get(`/articulo/${data}/referencia/marca`)
 }
 //borrar marca
 export const deleteMarca = data => {
@@ -28,7 +28,7 @@ export const sendModelo = data => {
 
 //obtener modelo
 export const getModelo = data => {
-  return api.get('/articulo/modelo', data)
+  return api.get(`/articulo/${data}/referencia/modelo`)
 }
 //borrar modelo
 export const deleteModelo = data => {

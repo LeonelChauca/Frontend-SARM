@@ -22,7 +22,7 @@ export const breadCrumbData = [
   {
     label: 'Visualizar Arma',
     icon: 'pi pi-eye',
-    url: '/dashboard/configuracionEquipo/arma/verarmas',
+    url: '/dashboard/configuracionEquipo/arma/verArmas',
   },
   {
     label: 'Equipo',

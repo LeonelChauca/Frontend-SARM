@@ -23,11 +23,13 @@ const routes = [
         name: 'configuracionEquipo',
         component: () =>
           import('../equipo/views/DashboardConfiguracionView.vue'),
+
         children: [
           {
             path: 'arma',
             name: 'arma',
             component: () => import('../equipo/layout/ConfArmamentoLayout.vue'),
+            props: true,
             children: [
               {
                 path: 'verarmas',
@@ -40,12 +42,14 @@ const routes = [
                 name: 'marca',
                 component: () =>
                   import('../equipo/views/ConfiguracionMarcaView.vue'),
+                props: true,
               },
               {
                 path: 'modelo',
                 name: 'modelos',
                 component: () =>
                   import('../equipo/views/ConfiguracionModeloView.vue'),
+                props: true,
               },
             ],
           },
@@ -83,6 +87,12 @@ const routes = [
           //     import('../equipo/views/DashboardConfiguracionView.vue'),
           // },
         ],
+      },
+      {
+        path: 'configuracionUpolicial',
+        name: 'configuracionUpolicial',
+        component: () =>
+          import('../u_policial/views/ConfiguracionUpolicial.vue'),
       },
     ],
   },

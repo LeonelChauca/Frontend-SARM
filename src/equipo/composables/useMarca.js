@@ -28,10 +28,10 @@ export function useMarca() {
     }
   }
 
-  const GetMarca = async () => {
+  const GetMarca = async data => {
     loadingGet.value = true
     try {
-      const res = await getMarca()
+      const res = await getMarca(data)
       responseGet.value = res.data
     } catch (err) {
       errorGet.value = err

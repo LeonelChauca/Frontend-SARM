@@ -51,12 +51,20 @@ import DialogRegistrarArticulo from '../componentes/DialogRegistrarArticulo.vue'
 import { ref, watch } from 'vue'
 import { useEquipo } from '../composables/useEquipo'
 import TableArticulo from '../componentes/TableArticulo.vue'
+import { useMarca } from '../composables/useMarca'
+
+const props = defineProps({
+  type: String,
+})
+
 const dialogVisible = ref(false)
 const data = ref([])
 const countEquipo = ref(0)
 const swcambios = ref(false)
 const { responseGet, responseDelete, loadingGet, GetEquipo, DeleteEquipo } =
   useEquipo()
+
+//const { responseGet,responseDelete, loadingGet,GetMarca, DeleteMarca }=useMarca();
 
 watch(
   swcambios,
