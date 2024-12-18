@@ -3,7 +3,7 @@ name: CI/CD: Build, Push, and Deploy Docker Image
 on:
   push:
     branches:
-      - main
+      - main  # Ejecutar solo en la rama main
 
 jobs:
   build-and-push:
@@ -27,7 +27,7 @@ jobs:
 
   deploy:
     name: Deploy Docker Image to Server
-    needs: build-and-push
+    needs: build-and-push  # Este trabajo depende de "build-and-push"
     runs-on: ubuntu-latest
 
     steps:
