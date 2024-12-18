@@ -48,9 +48,9 @@ jobs:
           expect "$ "
           send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
           expect {
-              -re "Downloaded newer image.*" { exp_continue }  
-              -re "Status:.*" { exp_continue }                
-              "$ " { }                                       
+            -re "Downloaded newer image.*" { exp_continue }  
+            -re "Image is up to date.*" { exp_continue }   
+            "$ " { }                                       
           }
           send "sudo docker stop arm || true && sudo docker rm arm || true\r"
           expect "$ "
