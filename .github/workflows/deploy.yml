@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to Ubuntu Server
         run: |
           expect <<EOF
-          spawn ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}
+          spawn ssh servidor@172.16.171.117
           expect "password:"
           send "${{ secrets.SERVER_PASSWORD }}\r"
           expect "$ "
