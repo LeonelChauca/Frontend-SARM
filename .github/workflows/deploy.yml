@@ -17,7 +17,7 @@ jobs:
 
       # 2. Loguear en GitHub Container Registry
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       # 3. Construir y subir la imagen Docker
       - name: Build and Push Docker Image
