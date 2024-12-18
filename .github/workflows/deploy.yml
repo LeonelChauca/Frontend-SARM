@@ -47,9 +47,13 @@ jobs:
           send "${{ secrets.SERVER_PASSWORD }}\r"
           expect "$ "
           send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-          send "sudo docker stop arm" 
-          send "sudo docker rm arm\r"
-          send "docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
+          expect {
+              "Downloaded newer image" { exp_continue }
+              "$ " { }  # Espera a que el prompt vuelva después de que `docker pull` termine.
+          }
+          send "sudo docker stop arm || true && sudo docker rm arm || true\r"
+          expect "$ "
+          send "sudo docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
           expect "$ "
           send "exit\r"
           EOF
