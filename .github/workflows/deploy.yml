@@ -48,7 +48,7 @@ jobs:
           expect "$ "
           send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest > /tmp/docker_pull.log 2>&1 &\r"
           expect "$ "
-          send "wait\r"  # Esperar a que el proceso en segundo plano termine.
+          send "wait\r" 
           expect "$ "
           send "sudo docker stop arm || true && sudo docker rm arm || true\r"
           expect "$ "
