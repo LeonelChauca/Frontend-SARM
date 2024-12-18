@@ -67,7 +67,7 @@
                 image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
                 shape="circle"
               />
-              <span class="font-bold">Amy Elsner</span>
+              <span class="font-bold">Leonel chauca</span>
             </a>
           </div>
         </div>
