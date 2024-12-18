@@ -42,17 +42,21 @@ jobs:
       - name: Deploy to Ubuntu Server
         run: |
           expect <<EOF
-          spawn ssh servidor@172.16.171.117
-          expect "password:"
-          send "${{ secrets.SERVER_PASSWORD }}\r"
-          expect "$ "
-          send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-          expect "$ "
-          send "sudo docker stop arm\r"
-          expect "$ "
-          send "sudo docker rm arm\r"
-          expect "$ "
-          send "sudo docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-          expect "$ "
-          send "exit\r"
+            spawn ssh servidor@172.16.171.117
+            expect "password:"
+            send "${{ secrets.SERVER_PASSWORD }}\r"
+            expect "$ "
+            send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
+            expect {
+              "Digest: sha256" { exp_continue }
+              "Status: Downloaded newer image for ghcr.io/leonelchauca/proyecto-arm-vue-app:latest" { exp_continue }
+              "$ " { }
+            }
+            send "sudo docker stop arm\r"
+            expect "$ "
+            send "sudo docker rm arm\r"
+            expect "$ "
+            send "sudo docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
+            expect "$ "
+            send "exit\r"
           EOF
