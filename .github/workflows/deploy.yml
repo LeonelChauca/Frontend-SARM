@@ -48,8 +48,7 @@ jobs:
             expect "$ "
             send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
             expect {
-              "Digest: sha256" { exp_continue }
-              "Status: Downloaded newer image for ghcr.io/leonelchauca/proyecto-arm-vue-app:latest" { exp_continue }
+              -re "Digest: sha256|Status: Downloaded newer image for ghcr.io/leonelchauca/proyecto-arm-vue-app:latest" { exp_continue }
               "$ " { }
             }
             send "sudo docker stop arm\r"
