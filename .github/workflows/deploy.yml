@@ -1,0 +1,53 @@
+name: CI/CD: Build, Push, and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar el código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Loguear en GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # 3. Construir y subir la imagen Docker
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ghcr.io/leonelchauca/proyecto-arm-vue-app:latest .
+          docker push ghcr.io/leonelchauca/proyecto-arm-vue-app:latest
+
+  deploy:
+    name: Deploy Docker Image to Server
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Instalar dependencias necesarias
+      - name: Install expect
+        run: sudo apt-get update && sudo apt-get install -y expect
+
+      # 2. Conectar y actualizar la imagen en el servidor
+      - name: Deploy to Ubuntu Server
+        run: |
+          expect <<EOF
+          spawn ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}
+          expect "password:"
+          send "${{ secrets.SERVER_PASSWORD }}\r"
+          expect "$ "
+          send "docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
+          expect "$ "
+          send "docker stop arm || true && docker rm arm || true\r"
+          expect "$ "
+          send "docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
+          expect "$ "
+          send "exit\r"
+          EOF
