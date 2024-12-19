@@ -67,7 +67,7 @@
                 image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
                 shape="circle"
               />
-              <span class="font-bold">Leo 2002</span>
+              <span class="font-bold">Leo 200</span>
             </a>
           </div>
         </div>
