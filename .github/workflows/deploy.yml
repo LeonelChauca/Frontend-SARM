@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-push:
-    name: Build and Push Docker Image
+    name: Push Docker Imagen
     runs-on: ubuntu-latest
 
     steps:
@@ -24,38 +24,3 @@ jobs:
         run: |
           docker build -t ghcr.io/leonelchauca/proyecto-arm-vue-app:latest .
           docker push ghcr.io/leonelchauca/proyecto-arm-vue-app:latest
-
-  deploy:
-    name: Deploy Docker Image to Server
-    needs: build-and-push # Este trabajo depende de "build-and-push"
-    permissions:
-      contents: read
-      packages: write
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1. Instalar dependencias necesarias
-      - name: Install expect
-        run: sudo apt-get update && sudo apt-get install -y expect
-
-      # 2. Conectar y actualizar la imagen en el servidor
-      - name: Deploy to Ubuntu Server
-        run: |
-          expect <<EOF
-            spawn ssh servidor@172.16.171.117
-            expect "password:"
-            send "${{ secrets.SERVER_PASSWORD }}\r"
-            expect "$ "
-            send "sudo docker pull ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-            expect {
-              -re "Digest: sha256|Status: Downloaded newer image for ghcr.io/leonelchauca/proyecto-arm-vue-app:latest" { exp_continue }
-              "$ " { }
-            }
-            send "sudo docker stop arm\r"
-            expect "$ "
-            send "sudo docker rm arm\r"
-            expect "$ "
-            send "sudo docker run -d --name arm -p 3000:80 ghcr.io/leonelchauca/proyecto-arm-vue-app:latest\r"
-            expect "$ "
-            send "exit\r"
-          EOF

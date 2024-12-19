@@ -55,7 +55,7 @@ const routes = [
           },
           {
             path: 'equipo',
-            name: 'equipo',
+            name: 'configuracion_equipo',
             component: () =>
               import('../equipo/layout/ConfEquipamientoLayout.vue'),
             children: [
@@ -93,6 +93,11 @@ const routes = [
         name: 'configuracionUpolicial',
         component: () =>
           import('../u_policial/views/ConfiguracionUpolicial.vue'),
+      },
+      {
+        path: 'listado-upolicial',
+        name: 'listado-upolicial',
+        component: () => import('../u_policial/views/ListadoUpolicial.vue'),
       },
     ],
   },

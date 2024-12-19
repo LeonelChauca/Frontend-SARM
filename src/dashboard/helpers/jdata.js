@@ -21,7 +21,7 @@ export const dashboardPrueba = [
     rutasHijas: [
       {
         nombre: 'Listado',
-        ruta: '/verequipo',
+        ruta: '/listado-Upolicial',
         icono: 'pi pi-plus',
       },
       {

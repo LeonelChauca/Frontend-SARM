@@ -32,7 +32,7 @@
       </Column>
 
       <!-- Columna de acciones -->
-      <Column header="Acciones">
+      <Column header="Acciones" v-if="acciones">
         <template #body="slotProps">
           <template v-if="loading || data.length === 0">
             <Skeleton />
@@ -99,6 +99,10 @@ const props = defineProps({
   tipo: {
     type: String,
     default: 'Arma',
+  },
+  acciones: {
+    type: Boolean,
+    default: true,
   },
 })
 // Emitir cambios tras eliminar un elemento
