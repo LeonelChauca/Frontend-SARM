@@ -26,6 +26,7 @@ const { responseGet, loadingGet, getUnidadPolicial } = useUpolicial()
 
 onMounted(async () => {
   await getUnidadPolicial()
+  console.log(responseGet.value)
   dataUpolicial.value = responseGet.value
 })
 </script>
