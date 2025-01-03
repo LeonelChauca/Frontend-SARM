@@ -10,6 +10,7 @@ export function useUpolicial() {
     try {
       const res = await getUnidadesPoliciales()
       responseGet.value = res.data
+      console.log(res)
     } catch (err) {
       errorGet.value = err
     } finally {

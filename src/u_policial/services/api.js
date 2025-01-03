@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = import.meta.env.VITE_API_URL_DEVELOP
+const baseURL = import.meta.env.VITE_API_URL
 
 const api = axios.create({
   baseURL: baseURL,
@@ -11,5 +11,5 @@ const api = axios.create({
 //UNIDADES POLICIALES
 
 export const getUnidadesPoliciales = () => {
-  return api.get('/oficiales-unidades-ms')
+  return api.get('/oficiales-unidades-ms/unidad')
 }
